@@ -15,6 +15,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
+        if(Objects.equals(user.getLastName(),"")|| Objects.equals(user.getFirstName(), "")||Objects.equals(user.getMobileno(),"")||Objects.equals(user.getUsername(),"")||Objects.equals(user.getPassword(),"")){
+            throw new IllegalArgumentException("Some fields are missing");
+        }
         return userRepo.save(user);
     }
 

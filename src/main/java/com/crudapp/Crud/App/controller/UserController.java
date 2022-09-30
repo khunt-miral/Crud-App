@@ -5,23 +5,27 @@ import com.crudapp.Crud.App.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
-
+    @GetMapping
+    public void redirect(HttpServletResponse response) throws IOException {
+        response.sendRedirect("/swagger-ui/index.html");
+    }
     @PostMapping("/addUser")
     public User register(@RequestBody User user){
         return userService.addUser(user);
     }
 
     @GetMapping("/getAllUser")
-    public List<User> getAllUser(User user){
+    public List<User> getAllUser(){
         return userService.getAllUsers();
     }
 
